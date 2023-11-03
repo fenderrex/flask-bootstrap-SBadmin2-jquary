@@ -19,7 +19,7 @@ class ExampleForm(Form):
     field1 = TextField('First Field', description='This is field one.')
     field2 = TextField('Second Field', description='This is field two.',
                        validators=[Required()])
-    hidden_field = HiddenField('You cannot see this', description='Nope')
+    hidden_tag = HiddenField('You cannot see this', description='Nope')
     recaptcha = RecaptchaField('A sample recaptcha field')
     radio_field = RadioField('This is a radio field', choices=[
         ('head_radio', 'Head radio'),
@@ -60,7 +60,7 @@ def create_app(configfile=None):
     @app.route('/', methods=('GET', 'POST'))
     def index():
         form = ExampleForm()
-        form.validate_on_submit()  # to get error messages to the browser
+      #  form.validate_on_submit()  # to get error messages to the browser
         flash('critical message', 'critical')
         flash('error message', 'error')
         flash('warning message', 'warning')
@@ -73,4 +73,7 @@ def create_app(configfile=None):
     return app
 
 if __name__ == '__main__':
-    create_app().run(debug=True)
+    app=create_app()
+
+    app._static_folder=r'C:\Users\fenderrex\Desktop\howToMaker\flask-bootstrap-master\sample_application\static'
+    app.run(debug=True)
